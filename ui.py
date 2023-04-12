@@ -24,10 +24,12 @@ class UI(Turtle):
 
     def header(self):
         self.clear()
-        self.goto(x=0, y=-150)
+        # self.goto(x=0, y=-150)
+        self.goto(x=430, y=235)
         self.write('Breakout', align=ALIGNMENT, font=FONT)
-        self.goto(x=0, y=-180)
-        self.write('Press Space to PAUSE or RESUME the Game',
+        self.goto(x=0, y=-150)
+        # self.goto(x=0, y=-180)
+        self.write('Press Space PAUSE/RESUME Game',
                    align=ALIGNMENT, font=('Calibri', 14, 'normal'))
 
     def change_color(self):

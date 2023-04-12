@@ -52,6 +52,13 @@ def check_collision_with_walls():
     # thus he loses. The game resets.
     if ball.ycor() < -280:
         ball.reset()
+        score.decrease_lives()
+        if score.lives == 0:
+            score.reset()
+            playing_game = False
+            ui.game_over(win=False)
+            return
+        ui.change_color()
         return
 def check_collision_with_paddle():
     global ball, paddle
@@ -104,6 +111,7 @@ def check_collision_with_bricks():
     for brick in bricks.bricks:
         if ball.distance(brick) < 40:
             brick.quantity -= 1
+            score.increase_score()
             if brick.quantity == 0:
                 brick.clear()
                 brick.goto(3000, 3000)
@@ -126,7 +134,7 @@ def check_collision_with_bricks():
                 ball.bounce(x_bounce=False, y_bounce=True)
 
 while playing_game:
-    if not game_paused:
+    if not (game_paused):
         screen.update()
         time.sleep(0.01)
         ball.move()
