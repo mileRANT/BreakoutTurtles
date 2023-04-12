@@ -2,6 +2,8 @@ import turtle as tr
 from paddle import Paddle
 from ball import Ball
 from bricks import Bricks
+from scoreboard import Scoreboard
+from ui import UI
 import time
 
 screen = tr.Screen()
@@ -10,16 +12,27 @@ screen.bgcolor('black')
 screen.title('Breakout')
 screen.tracer(0)
 
+ui = UI()
+ui.header()
+score = Scoreboard(lives=5)
+
 paddle = Paddle()
 bricks = Bricks()
 ball = Ball()
 
+game_paused = False
 playing_game = True
+def pause_game():
+    global game_paused
+    if game_paused:
+        game_paused = False
+    else:
+        game_paused = True
 
 screen.listen()
 screen.onkey(key='Left', fun=paddle.move_left)
 screen.onkey(key='Right', fun=paddle.move_right)
-
+screen.onkey(key='space', fun=pause_game)
 
 def check_collision_with_walls():
     global ball
@@ -113,12 +126,20 @@ def check_collision_with_bricks():
                 ball.bounce(x_bounce=False, y_bounce=True)
 
 while playing_game:
-    screen.update()
-    time.sleep(0.01)
-    ball.move()
+    if not game_paused:
+        screen.update()
+        time.sleep(0.01)
+        ball.move()
 
-    check_collision_with_walls()
-    check_collision_with_paddle()
-    check_collision_with_bricks()
+        check_collision_with_walls()
+        check_collision_with_paddle()
+        check_collision_with_bricks()
+
+        if len(bricks.bricks) == 0:
+            ui.game_over(win=True)
+            break
+
+    else:
+        ui.paused_status()
 
 tr.mainloop()

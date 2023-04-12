@@ -36,7 +36,7 @@ class Brick(Turtle):
 class Bricks:
     def __init__(self):
         self.y_start = 100
-        self.y_end = 270
+        self.y_end = 240
         self.bricks = []
         self.create_all_lanes()
 
