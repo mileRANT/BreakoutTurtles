@@ -8,9 +8,11 @@ COLOR_LIST = ['light blue', 'royal blue',
               'sandy brown', 'purple', 'deep pink',
               'medium sea green', 'khaki']
 
-weights = [1, 2, 1, 1, 3, 2, 1, 4, 1, 3,
-           1, 1, 1, 4, 1, 3, 2, 2, 1, 2,
-           1, 2, 1, 2, 1]
+# weights = [1, 2, 1, 1, 3, 2, 1, 4, 1, 3,
+#            1, 1, 1, 4, 1, 3, 2, 2, 1, 2,
+#            1, 2, 1, 2, 1]
+
+weights = [1]
 
 
 class Brick(Turtle):
@@ -33,8 +35,8 @@ class Brick(Turtle):
 
 class Bricks:
     def __init__(self):
-        self.y_start = 0
-        self.y_end = 240
+        self.y_start = 100
+        self.y_end = 270
         self.bricks = []
         self.create_all_lanes()
 
